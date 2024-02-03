@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	
+
+	<record id="sales_order_system_mfg_form" model="ir.ui.view">
+		<field name="name">sales_order_system.mfg.form</field>
+		<field name="model">sales_order_system.mfg</field>
+		<field name="arch" type="xml">
+			<form>
+				<sheet>
+					<group col="4">
+				<field name="sales_order_" />
+				<field name="item_rate_"/>
+					</group>
+					<group col="4">
+				<field name="date"/>
+				<field name="qty"/>
+				
+                
+				</group>
+				
+				</sheet>
+			</form>
+		</field>
+	</record>
+	
+	<record id="sales_order_system_mfg_tree" model="ir.ui.view">
+		<field name="name">sales_order_system.mfg.tree</field>
+		<field name="model">sales_order_system.mfg</field>
+		<field name="arch" type="xml">
+			<!-- <tree editable="bottom"> -->
+			<tree>
+				<field name="sales_order_"/>
+				<field name="item_rate_"/>
+				<field name="date"/>
+				<field name="qty"/>
+			</tree>
+		</field>
+	</record>
+
+
+	<record id="sales_order_system_mfg_action" model="ir.actions.act_window">
+		<field name="name">mfg</field>
+		<field name="res_model">sales_order_system.mfg</field>
+		<field name="view_mode">tree,form</field>
+	</record>
+
+	<menuitem action="sales_order_system_mfg_action" id="sales_order_system_mfg_menu" name="mfg info" parent="stud_section" sequence="19" groups="group_sales_order_system_user"/>
+</odoo>

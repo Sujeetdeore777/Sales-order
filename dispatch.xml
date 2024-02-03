@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	
+
+	<record id="sales_order_system_dispatch_form" model="ir.ui.view">
+		<field name="name">sales_order_system.dispatch.form</field>
+		<field name="model">sales_order_system.dispatch</field>
+		<field name="arch" type="xml">
+			<form>
+				<sheet>
+					<group col="4">
+				<field name="sales_order_"/>
+				<field name="customer_master_"/>
+				<field name="item_"/>
+				
+					</group>
+					<group col="4">
+				<field name="qty"/>
+				<field name="agree_rate"/>
+				<field name="amount"/>
+                <field name="dispatch_date"/>
+                
+				</group>
+				
+				</sheet>
+			</form>
+		</field>
+	</record>
+	
+	<record id="sales_order_system_dispatch_tree" model="ir.ui.view">
+		<field name="name">sales_order_system.dispatch.tree</field>
+		<field name="model">sales_order_system.dispatch</field>
+		<field name="arch" type="xml">
+			<!-- <tree editable="bottom"> -->
+			<tree>
+				<field name="sales_order_"/>
+				<field name="customer_master_"/>
+				<field name="item_"/>
+                <field name="qty"/>
+				<field name="agree_rate"/>
+				<field name="amount"/>
+                <field name="dispatch_date"/>
+			</tree>
+		</field>
+	</record>
+
+
+	<record id="sales_order_system_dispatch_action" model="ir.actions.act_window">
+		<field name="name">dispatch</field>
+		<field name="res_model">sales_order_system.dispatch</field>
+		<field name="view_mode">tree,form</field>
+	</record>
+
+	<menuitem action="sales_order_system_dispatch_action" id="sales_order_system_dispatch_menu" name="dispatch info" parent="stud_section" sequence="18" groups="group_sales_order_system_user"/>
+</odoo>

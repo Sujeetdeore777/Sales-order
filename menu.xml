@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Top menu item -->
+  <menuitem name="Sales" id="parentid" sequence="10" groups="group_sales_order_system_user"/>
+
+  <menuitem name="student"  id="stud_section"  parent="parentid" sequence="1" groups="group_sales_order_system_user"/>
+
+  <menuitem name="sales_info"  id="sales1"  parent="parentid" sequence="2" groups="group_sales_order_system_user"/>
+
+  <menuitem name="item info"  id="itemreport"  parent="parentid" sequence="3" groups="group_sales_order_system_user"/>
+
+  <menuitem name="customer_info"  id="cus1"  parent="parentid" sequence="3" groups="group_sales_order_system_user"/>
+  <menuitem name="item_info"  id="item1"  parent="parentid" sequence="4" groups="group_sales_order_system_user"/>
+  
+</odoo>

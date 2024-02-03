@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+	<!--sequece  start -->
+<data noupdate="1">
+		<record id="seq_sales_order" model="ir.sequence">
+		<field name="name">sales Sequence</field>
+        <field name="code">sales_order_system.sales_order</field>
+        <field name="prefix">SO-</field>
+		<field name="padding">5</field>
+		<field eval="1" name="number_next"/>
+		<field eval="1" name="number_increment"/>
+		</record>
+	</data>
+<!-- sequece start -->
+
+
+
+ <!-- trans model define start -->
+
+	
+	 <!-- Define the action for sales_order_system_trans_action1 -->
+
+	<!-- <record id="sales_order_system_trans_action1" model="ir.actions.server">
+        <field name="name">Item wise Report</field>
+        <field name="model_id" ref="model_sales_order_system_sales_order"/>
+        <field name="code">action = True</field>
+    </record> -->
+
+	
+
+
+    <!-- Define the action for sales_order_system_tdisp_action -->
+
+    <!-- <record id="sales_order_system_tdisp_action" model="ir.actions.server">
+        <field name="name">Add New</field>
+        <field name="model_id" ref="model_sales_order_system_tdisp"/>
+        <field name="code">action = True</field>
+    </record>  -->
+
+
+ <!-- trans model define end -->
+ <record id="sales_order_system_sales_order_form" model="ir.ui.view">
+	<field name="name">sales_order_system.sales_order.form</field>
+	<field name="model">sales_order_system.sales_order</field>
+	<field name="arch" type="xml">
+		<form>
+
+		<header>
+			<button name="action_force_close" type="object" class="oe_stat_button" string="Forse Close" groups="sales_order_system.group_sales_order_system_user" />
+			
+			<field name="state" widget="statusbar"/>
+
+		</header>
+
+		<sheet>
+
+			 <!-- Transaction Model Open Button Section -->
+
+
+			
+
+			 <button name="%(sales_order_system_trans_action1)d" 
+			 type="action" 
+			 class="btn-primary oe_stat_button" 
+			 icon="fa-fast-forward" 
+			 string="Item wise Report" 
+			 groups="sales_order_system.group_sales_order_system_user" /> 
+
+		 
+ 
+	 <!-- Transaction Model Manufacturing Button Section -->
+	 <button name="%(sales_order_system_tmfg_action)d" 
+			 type="action" 
+			 class="btn-primary oe_stat_button" 
+			 icon="fa-fast-forward" 
+			 string="Add Manufacturing" 
+			 groups="sales_order_system.group_sales_order_system_user"
+			 context="{'default_sales_order_':id}"  />  <!-- data pass this line -->
+ 
+	 <!-- Transaction Model Dispatch Button Section -->
+	 <button name="%(sales_order_system_tdisp_action)d" 
+			 type="action" 
+			 class="btn-primary oe_stat_button" 
+			 icon="fa-fast-forward" 
+			 string="Add Dispatch" 
+			 groups="sales_order_system.group_sales_order_system_user" 
+			 context="{'default_sales_order_':id}" />                         <!-- data pass this line -->
+
+
+		<!-- Fields Section -->
+		<group col="4">
+			<field name="so_code" />
+			<field name="item_rate_"  attrs="{'readonly': [('cutomer_', '=', False)]}" options="{'create': false, 'edit': false}" domain="[('cutomer_', '=', cutomer_)]"/>
+			<field name="cutomer_" attrs="{'readonly': [('state','!=', 'open')]}"   options="{'no_create': true, 'no_edit': true}"/>
+			<field name="qty" attrs="{'readonly': [('state','!=', 'open')]}" />
+		</group>
+	
+		<group col="4">
+			<field name="agree_rate" />
+			<field name="amount" />
+			<field name="mfgqty" />
+			<field name="dispqty" />
+		</group>
+	
+		<group col="4">
+			<field name="bal_to_mfg" />
+			<field name="bal_disp_amt" />
+			<field name="bal_to_disp" />
+			
+			<field name="state" />
+		</group>
+	
+		<group col="4">
+			<field name="mfg_s" nalable="1" />
+		</group>
+	
+		<group col="4">
+			<field name="dispatch_s" nalable="1" />
+		</group>
+
+			
+
+		</sheet>
+		
+
+			
+
+		</form>
+	</field>
+</record>
+
+
+	<record id="sales_order_system_sales_order_tree" model="ir.ui.view">
+		<field name="name">sales_order_system.sales_order.tree</field>
+		<field name="model">sales_order_system.sales_order</field>
+		<field name="arch" type="xml">
+			<!-- <tree editable="bottom"> -->
+				
+			<tree>
+				<field name="so_code"/>
+				<field name="item_rate_"/>
+				<field name="agree_rate" />
+				<field name="cutomer_"/>
+                <field name="qty"/>
+				<field name="amount"/>
+				<field name="mfgqty"/>
+                <field name="dispqty"/>
+				
+				<field name="bal_to_mfg"/>
+
+				
+				
+				<field name="bal_disp_amt"/>
+				<field name="state"/>
+				
+			</tree>
+		</field>
+	</record>
+
+
+	<record id="sales_order_system_sales_order_action" model="ir.actions.act_window">
+		<field name="name">sales_order</field>
+		<field name="res_model">sales_order_system.sales_order</field>
+		<field name="view_mode">tree,form</field>
+	</record>
+
+
+
+
+	<!-- trans model mfg start -->
+
+
+	<record id="sales_order_system_tmfg_form" model="ir.ui.view">
+		<field name="name">sales_order_system_tmfg_action</field>
+		<field name="model">sales_order_system.tmfg</field>
+		<field name="arch" type="xml">
+			<form>
+				<group colspan="4">
+					
+					<field name="item_rate_"/>
+					<field name="date"/>
+					<field name="qty"/>
+				</group>
+				<footer>
+					<button string="Generate Book" name="genbook" type="object" class="btn-primary o_open_tasks" icon="fa-check" groups="sales_order_system.group_sales_order_system_user"/>
+					<button string="Discard" class="btn-secondary" special="cancel"/>
+				</footer>
+			</form>
+		</field>
+	</record>
+	<record id="sales_order_system_tmfg_action" model="ir.actions.act_window">
+		<field name="name">Add Manufacture Item</field>
+		<field name="res_model">sales_order_system.tmfg</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="view_mode">form</field>
+		<field name="context">{}</field>
+		<field name="target">new</field>
+	</record>
+
+<!-- trans model mfg end -->
+
+
+
+
+
+<!-- trans model disp start -->
+
+
+<record id="sales_order_system_tdisp_form" model="ir.ui.view">
+	<field name="name">sales_order_system_tdisp_action</field>
+	<field name="model">sales_order_system.tdisp</field>
+	<field name="arch" type="xml">
+		<form>
+			<group colspan="4">
+				
+				<!-- <field name="sales_order_" /> -->
+				<field name="dispatch_date"/>
+				<field name="customer_master_"/>
+				<field name="item_"/>
+				<field name="qty"/>
+				<field name="agree_rate"/>
+				<field name="amount"/>
+			</group>
+			<footer>
+				<button string="Generate Book" name="genbook" type="object" class="btn-primary o_open_tasks" icon="fa-check" groups="sales_order_system.group_sales_order_system_user"/>
+				<button string="Discard" class="btn-secondary" special="cancel"/>
+			</footer>
+		</form>
+	</field>
+</record>
+<record id="sales_order_system_tdisp_action" model="ir.actions.act_window">
+	<field name="name">Add Dispatch Item</field>
+	<field name="res_model">sales_order_system.tdisp</field>
+	<field name="type">ir.actions.act_window</field>
+	<field name="view_mode">form</field>
+	<field name="context">{}</field>
+	<field name="target">new</field>
+</record>
+
+<!-- trans model disp end -->
+
+
+
+
+
+
+
+
+
+	<menuitem action="sales_order_system_sales_order_action" id="sales_order_system_sales_order_menu" name="Sales_order" parent="sales1" sequence="15" groups="group_sales_order_system_user"/>
+</odoo>

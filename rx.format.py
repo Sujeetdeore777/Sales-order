@@ -1,0 +1,1 @@
+bold_format = workbook.add_format({'bold': True})

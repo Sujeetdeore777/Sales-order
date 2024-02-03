@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="sales_order_system_trans_tree" model="ir.ui.view">
+        <field name="name">sales_order_system.trans.tree</field>
+        <field name="model">sales_order_system.trans1</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="item_"/>
+                <field name="total_mfg_qty"/>
+                <field name="total_disp_qty"/>
+                <field name="open_order_qty"/>
+            </tree>
+          
+
+        </field>
+    </record>
+
+
+    <record id="sales_order_system_trans_action1" model="ir.actions.act_window">
+        <field name="name">trans</field>
+        <field name="res_model">sales_order_system.trans1</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem action="sales_order_system_trans_action1" id="sales_order_system_trans_menu" name="trans info" parent="stud_section" sequence="50" groups="group_sales_order_system_user"/>
+</odoo>
